@@ -4,13 +4,15 @@ before_script:
   - flutter pub get
 
 stages:
-  - analyze-and-test
+  - build
+  - analyze
 
-analyze-and-test:
-  stage: analyze-and-test
+build:
+  stage: build
   script:
-    - flutter build aot
+    - flutter build apk
+
+analyze:
+  stage: analyze
+  script:
     - flutter analyze
-    - flutter test
-  only:
-    - merge_requests
