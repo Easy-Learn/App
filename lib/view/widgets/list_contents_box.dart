@@ -1,4 +1,7 @@
+import 'package:page_transition/page_transition.dart';
 import 'package:flutter/material.dart';
+
+import 'package:easy_learn/view/screens/content.dart';
 
 class ListContentsBox extends StatelessWidget {
   const ListContentsBox({Key? key, required this.imagePath, required this.title}) : super(key: key);
@@ -9,7 +12,9 @@ class ListContentsBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: (){},
+      onTap: (){
+        Navigator.push(context, PageTransition(type: PageTransitionType.size, alignment: Alignment.bottomCenter, child: const Content(category: 'None')));
+      },
       child: Container(
         padding: const EdgeInsets.all(5.0),
         decoration: BoxDecoration(
