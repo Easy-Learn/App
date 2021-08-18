@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 
 class CustomButton extends StatefulWidget {
-  const CustomButton({Key? key, required this.name, required this.size}) : super(key: key);
+  const CustomButton({Key? key, required this.name, required this.size, required this.navigator}) : super(key: key);
 
   final String name;
   final double size;
+  final Function() navigator;
 
   @override
   _CustomButtonState createState() => _CustomButtonState();
@@ -24,6 +25,7 @@ class _CustomButtonState extends State<CustomButton> {
         setState(() {
           isTap = false;
         });
+        widget.navigator();
       },
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 150),
