@@ -1,6 +1,8 @@
+import 'package:page_transition/page_transition.dart';
 import 'package:flutter/material.dart';
 
 import 'package:easy_learn/view/widgets/list_contents_box.dart';
+import 'package:easy_learn/view/screens/about.dart';
 
 class ListContents extends StatelessWidget {
   ListContents({Key? key}) : super(key: key);
@@ -65,6 +67,24 @@ class ListContents extends StatelessWidget {
                     },
                   ),
                 ),
+                Container(
+                  margin: const EdgeInsets.only(bottom: 100.0),
+                  child: SizedBox.expand(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        ElevatedButton(
+                          onPressed: (){
+                            Navigator.push(context, PageTransition(type: PageTransitionType.bottomToTop, child: const About()));
+                          },
+                          child: const Text("About", style: TextStyle(color: Colors.white, fontSize: 20.0),),
+                          style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Colors.blueAccent)),
+                        ),
+                      ],
+                    ),
+                  ),
+                )
               ]
             ),
         )
