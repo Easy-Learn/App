@@ -1,7 +1,7 @@
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 
-import 'package:easy_learn/view/screens/list_contents.dart';
+import 'package:easy_learn/view/screens/splash_screen.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -15,8 +15,8 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        home: ListContents()
+    return const MaterialApp(
+        home: SplashScreen()
     );
   }
 }
