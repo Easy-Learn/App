@@ -32,12 +32,14 @@ class _ContentState extends State<Content> {
               children: [
                 Container(
                   margin: const EdgeInsets.only(left: 10.0, bottom: 60.0),
-                  child: const CustomButton(name: 'close', size: 60.0,)
+                  child: CustomButton(name: 'close', size: 60.0, navigator: () {
+                    Navigator.pop(context);
+                  },)
                 ),
                 const ScoreBoard(),
                 Container(
                   margin: const EdgeInsets.only(right: 10.0, bottom: 60.0),
-                  child: const CustomButton(name: 'sound', size: 60.0,)
+                  child: CustomButton(name: 'sound', size: 60.0, navigator: () {},)
                 ),
               ],
             ),
@@ -46,7 +48,7 @@ class _ContentState extends State<Content> {
               children: [
                 Container(
                   margin: const EdgeInsets.only(left: 5.0),
-                  child: const CustomButton(name: 'previous', size: 100.0,)
+                  child: CustomButton(name: 'previous', size: 100.0, navigator: () {},)
                 ),
                 const SizedBox(
                   width: 180,
@@ -58,14 +60,14 @@ class _ContentState extends State<Content> {
                 ),
                 Container(
                   margin: const EdgeInsets.only(right: 5.0),
-                  child: const CustomButton(name: 'next', size: 100.0,)
+                  child: CustomButton(name: 'next', size: 100.0, navigator: () {})
                 )
               ],
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: const [
-                CustomButton(name: 'microphone', size: 190.0)
+              children: [
+                CustomButton(name: 'microphone', size: 190.0, navigator: () {},)
               ],
             ),
           ],
