@@ -13,7 +13,7 @@ class ListContentsBox extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: (){
-        Navigator.push(context, PageTransition(type: PageTransitionType.size, alignment: Alignment.bottomCenter, child: const Content(category: 'None')));
+        Navigator.push(context, PageTransition(type: PageTransitionType.rightToLeft, child: const Content(category: 'None')));
       },
       child: Container(
         padding: const EdgeInsets.all(5.0),
