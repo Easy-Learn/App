@@ -9,16 +9,24 @@ class ListContents extends StatelessWidget {
 
   final List<dynamic> listContents = [
     {
-        "name": "Animals"
+        "name": "Chapter 1",
+        "path": "chapter_1",
+        "locked": false
     },
     {
-        "name": "Fruits"
+        "name": "Chapter 2",
+        "path": "chapter_2",
+        "locked": true
     },
     {
-        "name": "Colors"
+        "name": "Chapter 3",
+        "path": "chapter_3",
+        "locked": true
     },
     {
-        "name": "Numbers"
+        "name": "Chapter 4",
+        "path": "chapter_4",
+        "locked": true
     }
   ];
 
@@ -61,8 +69,9 @@ class ListContents extends StatelessWidget {
                     itemCount: 4,
                     itemBuilder: (BuildContext ctx, index) {
                       return ListContentsBox(
-                        imagePath: 'assets/images/list_contents_${listContents[index]["name"].toLowerCase()}.png',
-                        title: listContents[index]["name"]
+                        imagePath: 'assets/images/${listContents[index]["path"]}.png',
+                        title: listContents[index]["name"],
+                        locked: listContents[index]["locked"]
                       );
                     },
                   ),
