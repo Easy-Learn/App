@@ -19,7 +19,7 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   loadSplash() async {
-    var duration = const Duration(seconds: 5);
+    var duration = const Duration(seconds: 3);
     return Timer(duration, () {
       Navigator.pushReplacement(context, PageTransition(
         type: PageTransitionType.fade,
