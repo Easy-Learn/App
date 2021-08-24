@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:easy_learn/view/widgets/custom_button.dart';
 import 'package:easy_learn/view/widgets/score_board.dart';
 import 'package:easy_learn/view/widgets/list_contents_box.dart';
-import 'package:easy_learn/config.dart' show model, label, inputType, sampleRate, recordingLength, bufferSize;
+import 'package:easy_learn/config.dart' show model, label, inputType, numOfInferences, sampleRate, recordingLength, bufferSize, detectionThreshold;
 
 
 class Content extends StatefulWidget {
@@ -37,9 +37,11 @@ class _ContentState extends State<Content> {
   void getResult() {
     result = TfliteAudio.startAudioRecognition(
       inputType: inputType,
+      numOfInferences: numOfInferences,
       sampleRate: sampleRate,
       recordingLength: recordingLength,
       bufferSize: bufferSize,
+      detectionThreshold: detectionThreshold
     );
 
     result ?.listen(
