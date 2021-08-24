@@ -20,7 +20,7 @@ class ScoreBoard extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Text(score, style: const TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold))
+          Text(score, style: const TextStyle(fontSize: 23.0, fontWeight: FontWeight.bold, color: Colors.white))
         ],
       ),
     );
