@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 
 import 'package:easy_learn/view/widgets/custom_button.dart';
 import 'package:easy_learn/view/widgets/score_board.dart';
-import 'package:easy_learn/view/widgets/list_contents_box.dart';
+import 'package:easy_learn/view/widgets/content_box.dart';
 import 'package:easy_learn/config.dart' show model, label, inputType, numOfInferences, sampleRate, recordingLength, bufferSize, detectionThreshold;
 
 
@@ -22,6 +22,53 @@ class Content extends StatefulWidget {
 class _ContentState extends State<Content> {
   final isRecording = ValueNotifier<bool>(false);
   Stream<Map<dynamic, dynamic>>? result;
+
+  int counter = 0;
+
+  final List<dynamic> contents = [
+    {
+      "title": "yes",
+    },
+    {
+      "title": "no",
+    },
+    {
+      "title": "up",
+    },
+    {
+      "title": "down",
+    },
+    {
+      "title": "left",
+    },
+    {
+      "title": "right",
+    },
+    {
+      "title": "on",
+    },
+    {
+      "title": "off",
+    },
+    {
+      "title": "stop",
+    },
+    {
+      "title": "go",
+    },
+  ];
+
+  void next() {
+    setState(() {
+      counter++;
+    });
+  }
+
+  void previous() {
+    setState(() {
+      counter--;
+    });
+  }
 
   @override
   void initState() {
@@ -49,7 +96,12 @@ class _ContentState extends State<Content> {
     ).onDone(() => isRecording.value = false);
   }
 
-  String showResult(AsyncSnapshot snapshot, String key) => snapshot.hasData ? snapshot.data[key].toString() : 'null ';
+  String showResult(AsyncSnapshot snapshot, String key) {
+    if (snapshot.hasData) {
+      return snapshot.data[key].toString();
+    }
+    return '-';
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -67,7 +119,7 @@ class _ContentState extends State<Content> {
               scoreBoard = const ScoreBoard(score: "-",);
               break;
             default:
-              scoreBoard = ScoreBoard(score: showResult(snapshot, 'recognitionResult'),);
+              scoreBoard = ScoreBoard(score: showResult(snapshot, 'recognitionResult') == contents[counter]["title"] ? showResult(snapshot, 'inferenceTime') : '-',);
           }
           return Container(
             decoration: const BoxDecoration(
@@ -100,19 +152,27 @@ class _ContentState extends State<Content> {
                   children: [
                     Container(
                       margin: const EdgeInsets.only(left: 5.0),
-                      child: CustomButton(name: 'previous', size: 100.0, navigator: () {},)
+                      child: CustomButton(name: 'previous', size: 100.0, navigator: () {
+                        if (counter != 0) {
+                          previous();
+                        }
+                      },)
                     ),
-                    const SizedBox(
+                    SizedBox(
                       width: 180,
                       height: 180,
-                      child: ListContentsBox(
-                        imagePath: 'assets/images/list_contents_animals.png',
-                        title: 'Animals'
+                      child: ContentBox(
+                        imagePath: 'assets/images/content_${contents[counter]["title"]}.png',
+                        title: contents[counter]["title"]
                       ),
                     ),
                     Container(
                       margin: const EdgeInsets.only(right: 5.0),
-                      child: CustomButton(name: 'next', size: 100.0, navigator: () {})
+                      child: CustomButton(name: 'next', size: 100.0, navigator: () {
+                        if (counter != 9) {
+                          next();
+                        }
+                      })
                     )
                   ],
                 ),
@@ -137,7 +197,7 @@ class _ContentState extends State<Content> {
                       }
                     )
                   ],
-                ),
+                )
               ],
             ),
           );
