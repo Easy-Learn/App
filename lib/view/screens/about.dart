@@ -1,12 +1,44 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
 
-class About extends StatelessWidget {
+import 'package:easy_learn/view/widgets/developer_box.dart';
+import 'package:easy_learn/view/widgets/developer_list.dart';
+
+class About extends StatefulWidget {
   const About({Key? key}) : super(key: key);
+
+  @override
+  _AboutState createState() => _AboutState();
+}
+
+class _AboutState extends State<About> {
+  bool isAccepted = false;
+  int state = 0;
+
+  final List<dynamic> developers = [
+    {
+      "name": "Michael William Jonathan",
+      "image": "michael",
+      "telegram": "https://t.me/moepoi"
+    },
+    {
+      "name": "Kelvin Samuel",
+      "image": "kelvin",
+      "telegram": "https://t.me/CoganUntar"
+    },
+    {
+      "name": "Hans Edison",
+      "image": "hans",
+      "telegram": "https://t.me/Takahashi18"
+    }
+  ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
+        alignment: Alignment.center,
         decoration: BoxDecoration(
           color: Colors.black,
           image: DecorationImage(
@@ -16,34 +48,52 @@ class About extends StatelessWidget {
           )
         ),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children : const [
-                Text("About", style: TextStyle(fontSize: 40.0, color: Colors.white),)
-              ]
-            ),
-            Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                const Text("Developed by : ", style: TextStyle(fontSize: 25.0, color: Colors.white),),
-                Container(
-                  padding: const EdgeInsets.only(left: 100.0),
-                  alignment: Alignment.centerLeft,
-                  child: const Text("- Michael William Jonathan", style: TextStyle(fontSize: 15.0, color: Colors.white),)
+                Draggable<int>(
+                  data: 0,
+                  child: DeveloperList(imagePath: developers[0]['image'], dragging: false),
+                  childWhenDragging: const SizedBox.shrink(),
+                  feedback: DeveloperList(imagePath: developers[0]['image'], dragging: true),
                 ),
-                Container(
-                  padding: const EdgeInsets.only(left: 100.0),
-                  alignment: Alignment.centerLeft,
-                  child: const Text("- Kelvin Samuel", style: TextStyle(fontSize: 15.0, color: Colors.white),)
+                Draggable<int>(
+                  data: 1,
+                  child: DeveloperList(imagePath: developers[1]['image'], dragging: false),
+                  childWhenDragging: const SizedBox.shrink(),
+                  feedback: DeveloperList(imagePath: developers[1]['image'], dragging: true),
                 ),
-                Container(
-                  padding: const EdgeInsets.only(left: 100.0),
-                  alignment: Alignment.centerLeft,
-                  child: const Text("- Hans Edison", style: TextStyle(fontSize: 15.0, color: Colors.white),)
-                ),
+                Draggable<int>(
+                  data: 2,
+                  child: DeveloperList(imagePath: developers[2]['image'], dragging: false),
+                  childWhenDragging: const SizedBox.shrink(),
+                  feedback: DeveloperList(imagePath: developers[2]['image'], dragging: true),
+                )
               ],
+            ),
+            DragTarget<int>(
+              onWillAccept: (value) => true,
+              onAccept: (value) {isAccepted = true; state = value;},
+              builder: (context, candidates, rejected) {
+                return (isAccepted) ? DeveloperBox(
+                  imagePath: developers[state]['image'],
+                  name: developers[state]['name'],
+                  telegram: developers[state]['telegram']
+                ) : Container(
+                  margin: const EdgeInsets.all(10.0),
+                  padding: const EdgeInsets.all(50.0),
+                  decoration: const BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.all(Radius.circular(25.0))
+                  ),
+                  child: const Center(
+                    child: Text('DRAG PROFILE PICTURE ABOVE TO HERE', style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold),),
+                  )
+                );
+              },
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -58,8 +108,8 @@ class About extends StatelessWidget {
               ]
             ),
           ],
-        ),
-      )
+        )
+      ),
     );
   }
 }
