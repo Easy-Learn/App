@@ -132,17 +132,17 @@ class _ContentState extends State<Content> {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Container(
-                      margin: const EdgeInsets.only(left: 10.0, bottom: 60.0),
+                      margin: const EdgeInsets.only(bottom: 60.0),
                       child: CustomButton(name: 'close', size: 60.0, navigator: () {
                         Navigator.pop(context);
                       },)
                     ),
                     scoreBoard,
                     Container(
-                      margin: const EdgeInsets.only(right: 10.0, bottom: 60.0),
+                      margin: const EdgeInsets.only(bottom: 60.0),
                       child: CustomButton(name: 'sound', size: 60.0, navigator: () {},)
                     ),
                   ],
@@ -150,14 +150,11 @@ class _ContentState extends State<Content> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    Container(
-                      margin: const EdgeInsets.only(left: 5.0),
-                      child: CustomButton(name: 'previous', size: 100.0, navigator: () {
-                        if (counter != 0) {
-                          previous();
-                        }
-                      },)
-                    ),
+                    CustomButton(name: 'previous', size: 100.0, navigator: () {
+                      if (counter != 0) {
+                        previous();
+                      }
+                    },),
                     SizedBox(
                       width: 180,
                       height: 180,
@@ -166,14 +163,11 @@ class _ContentState extends State<Content> {
                         title: contents[counter]["title"]
                       ),
                     ),
-                    Container(
-                      margin: const EdgeInsets.only(right: 5.0),
-                      child: CustomButton(name: 'next', size: 100.0, navigator: () {
-                        if (counter != 9) {
-                          next();
-                        }
-                      })
-                    )
+                    CustomButton(name: 'next', size: 100.0, navigator: () {
+                      if (counter != 9) {
+                        next();
+                      }
+                    })
                   ],
                 ),
                 Row(
