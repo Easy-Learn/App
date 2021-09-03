@@ -183,14 +183,14 @@ class _ContentState extends State<Content> {
                       valueListenable: isRecording,
                       builder: (context, value, widget) {
                         if (value == false) {
-                          return CustomButton(name: 'microphone', size: 190.0, navigator: () {
+                          return CustomButton(name: 'microphone', size: 170.0, navigator: () {
                             isRecording.value = true;
                             setState(() {
                               getResult();
                             });
                           });
                         } else {
-                          return CustomButton(name: 'microphone', size: 190.0, navigator: () {
+                          return CustomButton(name: 'microphone', size: 170.0, navigator: () {
                             TfliteAudio.stopAudioRecognition();
                           });
                         }
